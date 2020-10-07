@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
         @article = Article.new(article_params)
         if @article.save
             redirect_to @article
+            flash.alert = "Article has been created!"
         else
             render 'new'
         end
@@ -31,6 +32,7 @@ class ArticlesController < ApplicationController
         @article = Article.find(params['id'])
         if @article.update(article_params)
             redirect_to @article
+            flash.alert = "Article has been updated!"
         else
             render 'edit'
         end
@@ -39,8 +41,8 @@ class ArticlesController < ApplicationController
     def destroy
         @article = Article.find(params['id'])
         @article.destroy
-        
         redirect_to articles_path
+        flash.alert = "Article has been deleted!"
     end
     
     private

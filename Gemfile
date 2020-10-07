@@ -22,6 +22,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# get better errors
+gem 'better_errors', '~> 2.8', '>= 2.8.3'
+
 # devise gem
 gem 'devise', '~> 4.7', '>= 4.7.3'
 

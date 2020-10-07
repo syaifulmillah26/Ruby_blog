@@ -20,10 +20,19 @@
       <%= form.label :text %><br>
       <%= form.text_area :text, {class: 'form-control'} %>
   </div>
-  <div class="form-group">
-      <%= form.label :image %><br>
-      <%= form.file_field  :image %>
-  </div>
+
+  <% if action_name  != 'new' %>
+    <div class="form-group">
+        <small class="text-danger"><i>Leave it blank if you dont want to change the image!<i></small>  <br> 
+        <%= form.file_field  :image %>
+    </div>
+  <% else %>
+    <div class="form-group">
+        <%= form.label :image %><br> 
+        <%= form.file_field  :image, :required => true %>
+    </div>
+  <% end %>
+
   <%= link_to 'Back', articles_path, class: 'btn btn-secondary float-right ml-1' %>
   <%= form.submit "Save", {class: 'btn btn-primary float-right ml-1'} %>
 <% end %>
