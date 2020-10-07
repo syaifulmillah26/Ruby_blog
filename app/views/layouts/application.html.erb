@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/navbar' %>
+    <%= yield %>
+  </body>
+
+<footer>
+  <div class="card-footer text-muted text-center mt-5 pt-5 pb-5">
+    © 2020 Ruby On Rails, Inc. 
+  </div>
+</footer>
+</html>
