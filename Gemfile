@@ -6,7 +6,19 @@ ruby '2.6.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
+
+# use this for database
+gem 'mysql2'
+# buat role
+gem 'rolify', '~> 5.2'
+# ransack
+gem 'ransack'
+# buat nested form
+gem "cocoon"
+# buat api
+# gem 'graphql', '~> 0.9.2'
+
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -17,6 +29,9 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+
+# gem 'rack-cors'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -28,8 +43,16 @@ gem 'better_errors', '~> 2.8', '>= 2.8.3'
 # devise gem
 gem 'devise', '~> 4.7', '>= 4.7.3'
 
+# haml
+gem 'haml-rails', '~> 2.0', '>= 2.0.1'
+
+# for delete paranoia
+gem 'paranoia', '~> 2.1', '>= 2.1.5'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
+gem 'jquery-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

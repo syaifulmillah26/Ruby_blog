@@ -1,9 +1,18 @@
 class ArticlesController < ApplicationController
     ## spesific action for require authentication
     before_action :authenticate_user!, :except => [:index, :show,]
+    before_action :verify_is_admin_and_editor, :except => [:index, :show,]
 
     def index
-        @articles = Article.all
+        @categories = Category.all
+        cate = params[:cate]
+
+        if !cate.nil?
+            @articles = Article.where(:category_id => cate)
+        else
+            @search = Article.search(params[:q])
+            @articles = @search.result
+        end
     end
     
     def show
@@ -12,13 +21,14 @@ class ArticlesController < ApplicationController
     
     def new
         @article = Article.new
+
     end
     
     def create  
         @article = Article.new(article_params)
         if @article.save
             redirect_to @article
-            flash.alert = "Article has been created!"
+            flash.notice = "Article has been created!"
         else
             render 'new'
         end
@@ -32,7 +42,7 @@ class ArticlesController < ApplicationController
         @article = Article.find(params['id'])
         if @article.update(article_params)
             redirect_to @article
-            flash.alert = "Article has been updated!"
+            flash.notice = "Article has been updated!"
         else
             render 'edit'
         end
@@ -47,7 +57,7 @@ class ArticlesController < ApplicationController
     
     private
 	  def article_params
-	    params.require(:article).permit(:title, :text, :image)
+	    params.require(:article).permit(:title, :text, :image, :category_id, tags_attributes: [:id, :description, :done, :_destroy])
 	  end
     
 end

@@ -1,0 +1,9 @@
+.nested-fields
+  .form-group
+    = f.label :description
+    %br
+    = f.text_field :description, {class: 'form-control'}
+  .form-group
+    = f.check_box :done
+    = f.label :done
+  = link_to_remove_association "remove tag", f, {class: 'btn btn-outline-danger'}

@@ -1,0 +1,29 @@
+.container.mt-5
+  .col-md-8.m-auto
+    .media
+      .media-body
+        %h3.mt-0= @article.title
+        = image_tag(@article.image, class: 'img-fluid') if @article.image.attached?
+        %i
+          %h6 
+            Category : #{@article.category.category}
+        .text-justify
+          = @article.text 
+        %br/
+        %h6 
+          Tags
+        - for @tags in @article.tags 
+          %li 
+            =@tags.description 
+        %br/
+        - if current_user and current_user.has_role?(:editor)
+          = link_to 'Edit Article', edit_article_path(@article), class: 'badge badge-warning float-right ml-1'
+        .media.mt-3
+          .media-body
+            %h5mt-0 Comments
+            = render @article.comments
+        .media.mt-3
+          .media-body
+            = render 'comments/form'
+        = link_to 'Back', articles_path, class: 'badge badge-secondary float-right mt-3'
+

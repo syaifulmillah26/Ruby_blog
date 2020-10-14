@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-
+        user_params.permit({ roles: [3] }, :fullname, :email, :password, :password_confirmation)
   #   super
   # end
 

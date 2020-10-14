@@ -1,0 +1,17 @@
+
+<div class="container mt-5">
+
+<div class="row">
+<div class="col-md-4">
+    <h4>Edit</h4>
+        <%= form_with model: @category, local: true do |form| %>
+        <%= form.label :category %>
+        <%= form.text_field :category, class: 'form-control' %> 
+        <%= form.submit "Save", {class: 'btn btn-outline-primary mt-3'}  %>
+        <%= link_to "Back", categories_path, {class: 'btn btn-outline-secondary mt-3'}  %>
+    <% end %>
+</div>
+
+</div>
+
+</div>

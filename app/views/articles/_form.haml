@@ -1,0 +1,44 @@
+= form_with model: @article, local: true do |f|
+  - if @article.errors.any?
+    #error_explanation
+      %h2 
+        = pluralize(@article.errors.count, "error")
+        Prohibited
+        this article from  being saved:
+      %ul
+        - @article.errors.full_messages.each do |msg|
+          %li= msg 
+
+  .form-group 
+    = f.label :title 
+    %br/ 
+    = f.text_field :title, {class: 'form-control'}
+  .form-group
+    = f.label :text 
+    %br/
+    = f.text_area :text, {class: 'form-control'}
+  .form-group 
+    =f.label :category
+    %br/
+    = f.select :category_id, Category.all.map{ |c| [c.category, c.id]}, {class: 'form-control'}
+
+  - if action_name != 'new'
+    .form-group 
+      %small.text-danger 
+        %i 
+          Leave it blank if you don't want to change the image! 
+      %br/
+      = f.file_field :image
+  - else 
+    .form-group
+      = f.file_field :image, :required => true
+      %br/
+  %h5 Tags
+  #tasks
+    = f.fields_for :tags do |tag|
+      = render 'tag_fields', f: tag
+    .links
+      = link_to_add_association 'add tags', f, :tags, {class: 'btn btn-outline-success mt-2 mb-2'}  
+
+  = link_to 'Back', articles_path, {class: 'btn btn-outline-secondary float-right ml-1'}
+  = f.submit "save", {class: 'btn btn-outline-primary float-left ml-1'}

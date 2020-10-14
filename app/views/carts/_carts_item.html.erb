@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <% @order_items.each do |item| %>
+                <div class="row">
+                    <div class="col-md-4">
+                        <%= image_tag(item.product.image, class: 'img-fluid') if item.product.image.attached? %>
+                    </div>
+                    <div class="col-md-8">
+                        <h5> <%= item.product.title %> </h5>
+                        <h6> Price $ <%= item.product.price %> </h6>
+                        <%= form_for item, remote: true do |f| %>
+                            <%= f.hidden_field :product_id, :value => item.product.id %>
+                            <%= f.number_field :quantity, :value => item.quantity.to_i, :min => 1, class: 'form-control' %> 
+                            <%= link_to "Remove Items", order_item_path(item), method: :delete, remote: true, class: 'btn btn-outline-danger mt-2 float-right ml-1' %>
+                            <%= f.submit "Update Cart", class: 'btn btn-outline-primary mt-2 ml-1 float-right' %> 
+                        <% end %>
+                        <h6> Subtotal: $ <%= item.total %> </h6>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Total
+                </div>
+                <div class="card-body">
+                    <p>Your current carts value: $ <%= current_order.subtotal %> </p>
+                    <%= link_to 'Add more', shops_path %> |
+                    <%= link_to 'Checkout' %>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

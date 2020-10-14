@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <% if alert %> 
+        <div class="alert alert-info mt-2 ">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-9">
+      <div class="col-md-12">
+        <h3 class="text-center">Shops</h3>
+      </div>
+      <div class="row ">
+        <% @products.each do |product| %>
+          <div class="col-md-3 ml-2">
+            <div class="row">
+              <div class="card" style="width: 18rem;">
+                <%= link_to (image_tag(product.image, class: 'img-fluid') if product.image.attached?), shop_path(product) %>
+                <div class="card-body">
+                  <h6 class="card-title"><%= link_to product.title, shop_path(product) %></h6>
+                  <p class="card-text"> <%= product.price %> $</p>
+
+                  <%= form_for @order_item do |f| %>
+                  <%= f.hidden_field :product_id, :value => product.id %>
+                  <%= f.hidden_field :quantity, :value => 1 %>
+                  <%= f.submit "Add to cart", class: 'btn btn-outline-primary' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div> 
+        <% end %> 
+      </div>
+    </div>
+    <div class="col-md-3 mt-3">
+      <h5 class="text-center" >Categories</h5>
+      <ul class="list-group">
+        <% @category_products.each do |cat| %>
+          <li class="list-group-item">
+            <%= link_to cat.category_product, shops_path(:cate => cat.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+

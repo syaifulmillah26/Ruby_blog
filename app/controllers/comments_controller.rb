@@ -7,15 +7,21 @@ class CommentsController < ApplicationController
     end
     
     def destroy
-        @article = Article.find(params[:article_id])
-        @comment = @article.comments.find(params[:id])
-        @comment.destroy
-        
-        redirect_to article_path(@article)
+        if current_user.has_role?(:editor)
+            @article = Article.find(params[:article_id])
+            @comment = @article.comments.find(params[:id])
+            @comment.destroy
+            redirect_to article_path(@article)
+        else 
+            @article = Article.find(params[:article_id])
+            @comment = @article.comments.find(params[:id])
+            @comment.destroy
+            redirect_to article_path(@article)
+        end
     end
     
     private def comment_params
-        params.require(:comment).permit(:commenter, :body)
+        params.require(:comment).permit(:body, :commenter)
     end  
 
 end

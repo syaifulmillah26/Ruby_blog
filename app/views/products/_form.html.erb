@@ -1,0 +1,45 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :category_product_id %><br>
+      <%= form.select :category_product_id, CategoryProduct.all.map{ |c| [c.category_product, c.id] }, {class: 'form-control'} %>
+  </div>
+
+  <% if action_name  != 'new' %>
+    <div class="form-group">
+        <small class="text-danger"><i>*Leave it blank if you dont want to change the image!<i></small>  <br> 
+        <%= form.file_field  :image %>
+    </div>
+  <% else %>
+    <div class="form-group">
+        <%= form.label :image %><br> 
+        <%= form.file_field  :image, :required => true %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to 'Back', products_path, class: 'btn btn-outline-secondary float-right ml-1' %>
+    <%= form.submit 'Save Product', class: 'btn btn-outline-primary float-right ml-1' %>
+  </div>
+<% end %>

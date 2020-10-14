@@ -1,11 +1,9 @@
-
-<h5 class="mt-0">Comments</h5>
-<h6><%= comment.commenter %></h6>
-<%= comment.body %> <br />
-<% if user_signed_in? %>
+<h6> Author :  <%= comment.commenter %></h6>
+<%= comment.body %> <br /> <br />
+<% if current_user and current_user.fullname == comment.commenter %>
 	<%= link_to 'Delete', [comment.article, comment],
 	method: :delete,
 	data: {confirm: 'Are you sure?'},
-	class: 'badge badge-danger float-left' %>
+	class: 'badge badge-danger float-right' %>
 <% end %>    
 
